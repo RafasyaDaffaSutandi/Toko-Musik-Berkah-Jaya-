@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Pembelian - Berkah Jaya Musik</title>
+    <link rel="stylesheet" href="pembelian.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Form Pembelian</h1>
+    <p class="subtitle">Berkah Jaya Musik</p>
+
+    <form id="formPembelian">
+
+        <h2>Informasi Produk</h2>
+
+        <label>Nama Produk</label>
+        <input type="text" id="produk" readonly>
+
+        <label>Harga Satuan</label>
+        <input type="text" id="hargaTampil" readonly>
+
+        <label>Jumlah Produk</label>
+        <input type="number" id="jumlah" min="1" value="1" required>
+
+        <label>Warna Produk</label>
+        <select id="warna" required>
+            <option value="">-- Pilih Warna --</option>
+            <option>Natural</option>
+            <option>Black</option>
+            <option>White</option>
+            <option>Brown</option>
+            <option>Sunburst</option>
+            <option>Silver</option>
+            <option>Lainnya / Sesuai Stok</option>
+        </select>
+
+        <label>Varian / Tipe Produk</label>
+        <input type="text" id="varian" placeholder="Contoh: Standard, Deluxe, dll.">
+
+        <h2>Informasi Pembeli</h2>
+
+        <label>Nama Lengkap</label>
+        <input type="text" id="nama" placeholder="Masukkan nama lengkap" required>
+
+        <label>Email</label>
+        <input type="email" id="email" placeholder="Masukkan email" required>
+
+        <label>Nomor HP / WhatsApp</label>
+        <input type="tel" id="hp" placeholder="08xxxxxxxxxx" required>
+
+        <label>Alamat Lengkap</label>
+        <textarea id="alamat" rows="4" placeholder="Nama jalan, nomor rumah, kecamatan, kota, kode pos" required></textarea>
+
+        <label>Catatan Tambahan</label>
+        <textarea id="catatan" rows="3" placeholder="Catatan untuk penjual (opsional)"></textarea>
+
+        <h2>Ringkasan Pembelian</h2>
+
+        <div class="ringkasan">
+            <p>Harga Satuan: <span id="hargaRingkasan"></span></p>
+            <p>Jumlah: <span id="jumlahRingkasan">1</span></p>
+            <hr>
+            <h3>Total Pembayaran:</h3>
+            <h2 id="total">Rp0</h2>
+        </div>
+
+        <button type="submit">Kirim Pesanan</button>
+
+        <a href="index.html" class="kembali">Kembali ke Produk</a>
+
+    </form>
+
+</div>
+
+<script>
+
+    // Mengambil data produk dari URL
+    const params = new URLSearchParams(window.location.search);
+
+    const namaProduk = params.get("produk") || "";
+    const hargaProduk = Number(params.get("harga")) || 0;
+
+    const produk = document.getElementById("produk");
+    const hargaTampil = document.getElementById("hargaTampil");
+    const hargaRingkasan = document.getElementById("hargaRingkasan");
+    const jumlah = document.getElementById("jumlah");
+    const jumlahRingkasan = document.getElementById("jumlahRingkasan");
+    const total = document.getElementById("total");
+
+    // Format Rupiah
+    function rupiah(angka) {
+        return new Intl.NumberFormat("id-ID", {
+            style: "currency",
+            currency: "IDR",
+            maximumFractionDigits: 0
+        }).format(angka);
+    }
+
+    // Menampilkan data produk
+    produk.value = namaProduk;
+    hargaTampil.value = rupiah(hargaProduk);
+    hargaRingkasan.innerText = rupiah(hargaProduk);
+
+    // Menghitung total harga
+    function hitungTotal() {
+        let banyak = Number(jumlah.value);
+
+        if (banyak < 1 || !Number.isInteger(banyak)) {
+            banyak = 1;
+            jumlah.value = 1;
+        }
+
+        jumlahRingkasan.innerText = banyak;
+        total.innerText = rupiah(hargaProduk * banyak);
+    }
+
+    jumlah.addEventListener("input", hitungTotal);
+
+    hitungTotal();
+
+    // Mengirim pesanan ke WhatsApp
+    document.getElementById("formPembelian").addEventListener("submit", function(e) {
+
+        e.preventDefault();
+
+        if (!namaProduk || hargaProduk <= 0) {
+            alert("Produk tidak valid. Silakan kembali ke halaman produk.");
+            return;
+        }
+
+        const nama = document.getElementById("nama").value;
+        const email = document.getElementById("email").value;
+        const hp = document.getElementById("hp").value;
+        const alamat = document.getElementById("alamat").value;
+        const warna = document.getElementById("warna").value;
+        const varian = document.getElementById("varian").value;
+        const catatan = document.getElementById("catatan").value;
+        const banyak = Number(jumlah.value);
+
+        const totalHarga = hargaProduk * banyak;
+
+        const pesan =
+`HALO BERKAH JAYA MUSIK!
+Saya ingin melakukan pemesanan.
+
+=== DATA PRODUK ===
+Nama Produk: ${namaProduk}
+Harga Satuan: ${rupiah(hargaProduk)}
+Jumlah: ${banyak}
+Warna: ${warna}
+Varian: ${varian || "-"}
+
+=== DATA PEMBELI ===
+Nama: ${nama}
+Email: ${email}
+Nomor HP: ${hp}
+Alamat: ${alamat}
+
+Catatan: ${catatan || "-"}
+
+=== TOTAL PEMBAYARAN ===
+${rupiah(totalHarga)}
+
+Mohon konfirmasi pesanan saya. Terima kasih!`;
+
+        // GANTI NOMOR INI DENGAN NOMOR WHATSAPP TOKO
+        const nomorToko = "6281234567890";
+
+        const url = "https://wa.me/" + nomorToko + "?text=" + encodeURIComponent(pesan);
+
+        window.open(url, "_blank");
+
+    });
+
+</script>
+
+</body>
+</html>

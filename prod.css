@@ -1,0 +1,353 @@
+
+/* ==============================
+   BERKAH JAYA MUSIK
+   Theme: Cream, White & Brown
+   ============================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #F5F0E6;
+    color: #29231D;
+    padding: 40px;
+}
+
+/* CONTAINER PRODUK */
+
+.produk {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 25px;
+    align-items: stretch;
+}
+
+/* JUDUL MERK GITAR */
+
+.produk h2 {
+    grid-column: 1 / -1;
+    font-size: 28px;
+    color: #4A3024;
+    background-color: #E6D5BE;
+    padding: 18px 24px;
+    border-left: 6px solid #8B5E3C;
+    border-radius: 8px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+/* KARTU BARANG */
+
+.barang {
+    background-color: #FFFEFA;
+    border: 1px solid #E4D8C8;
+    border-radius: 14px;
+    padding: 20px;
+    text-align: left;
+    box-shadow: 0 5px 15px rgba(65, 43, 29, 0.08);
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+/* EFEK HOVER */
+
+.barang:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 12px 25px rgba(65, 43, 29, 0.16);
+    border-color: #B18A65;
+}
+
+/* GAMBAR GITAR */
+
+.barang img {
+    width: 100%;
+    height: 230px;
+    object-fit: contain;
+    background-color: #F8F4EC;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 18px;
+    transition: transform 0.3s ease;
+}
+
+.barang:hover img {
+    transform: scale(1.04);
+}
+
+/* NAMA PRODUK */
+
+.barang h3 {
+    font-size: 18px;
+    line-height: 1.5;
+    color: #35251C;
+    margin-bottom: 12px;
+    min-height: 54px;
+}
+
+/* HARGA PRODUK */
+
+.barang .harga {
+    font-size: 19px;
+    font-weight: bold;
+    color: #805333;
+    margin-bottom: 12px;
+}
+
+/* DESKRIPSI PRODUK */
+
+.barang p:not(.harga) {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #65584C;
+}
+
+/* RESPONSIVE TABLET */
+
+@media screen and (max-width: 1000px) {
+    body {
+        padding: 25px;
+    }
+
+    .produk {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    .barang img {
+        height: 210px;
+    }
+}
+
+/* RESPONSIVE HP */
+
+@media screen and (max-width: 600px) {
+    body {
+        padding: 15px;
+    }
+
+    .produk {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .produk h2 {
+        font-size: 23px;
+        padding: 15px 18px;
+        margin-top: 15px;
+    }
+
+    .barang {
+        padding: 16px;
+    }
+
+    .barang img {
+        height: 220px;
+    }
+
+    .barang h3 {
+        font-size: 17px;
+        min-height: auto;
+    }
+
+    .barang .harga {
+        font-size: 18px;
+    }
+
+```css
+/* DROPDOWN KATALOG PER MERK */
+
+body {
+    background-color: #F5F0E6;
+    color: #29231D;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 30px;
+}
+
+body > h1 {
+    text-align: center;
+    color: #4A3024;
+    margin-bottom: 30px;
+    font-size: 36px;
+}
+
+.produk {
+    max-width: 1400px;
+    margin: auto;
+}
+
+/* KOTAK DROPDOWN */
+
+.kategori {
+    background-color: #FFFEFA;
+    border: 1px solid #E4D8C8;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(65, 43, 29, 0.08);
+}
+
+/* NAMA MERK */
+
+.kategori summary {
+    background-color: #E6D5BE;
+    color: #4A3024;
+    padding: 20px 24px;
+    font-size: 21px;
+    font-weight: bold;
+    cursor: pointer;
+    list-style: none;
+    transition: background-color 0.3s ease;
+}
+
+.kategori summary::-webkit-details-marker {
+    display: none;
+}
+
+.kategori summary::after {
+    content: "+";
+    float: right;
+    font-size: 25px;
+    line-height: 20px;
+}
+
+.kategori[open] summary::after {
+    content: "\2212";
+}
+
+.kategori summary:hover {
+    background-color: #D9C2A5;
+}
+
+/* DAFTAR PRODUK DI DALAM DROPDOWN */
+
+.daftar-barang {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    padding: 22px;
+}
+
+/* KARTU PRODUK */
+
+.barang {
+    background-color: #FFFEFA;
+    border: 1px solid #E4D8C8;
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 4px 12px rgba(65, 43, 29, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.barang:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(65, 43, 29, 0.13);
+}
+
+.barang img {
+    width: 100%;
+    height: 220px;
+    object-fit: contain;
+    background-color: #F8F4EC;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.barang h3 {
+    color: #35251C;
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.barang .harga {
+    color: #805333;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.barang p:not(.harga) {
+    color: #65584C;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* TABLET */
+
+@media screen and (max-width: 1000px) {
+    .daftar-barang {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+        padding: 16px;
+    }
+}
+
+/* HP */
+
+@media screen and (max-width: 600px) {
+    body {
+        padding: 15px;
+    }
+
+    body > h1 {
+        font-size: 28px;
+    }
+
+    .kategori summary {
+        padding: 16px;
+        font-size: 18px;
+    }
+
+    .daftar-barang {
+        grid-template-columns: 1fr;
+        padding: 12px;
+    }
+
+    .barang img {
+        height: 200px;
+    }
+
+    
+.beli {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 10px 18px;
+    background: #182848;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.beli:hover {
+    background: #d35400;
+    transform: translateY(-2px);
+}
+
+.beli {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 10px 18px;
+    background: #182848;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.beli:hover {
+    background: #d35400;
+}
+}
+
